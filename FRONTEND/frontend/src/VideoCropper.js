@@ -4,8 +4,10 @@ import axios from "axios";
 import "./VideoCropper.css";
 import { ThreeCircles, ThreeDots } from "react-loader-spinner";
 
+const trimmed = "trimmed.mp4";
+
 const VideoCropper = ({ onButtonClick }) => {
-  const [mergeStatus, setStatus] = useState("");
+  const [mergeStatus, setStatus] = useState("merged");
   const [videoFile, setVideoFile] = useState(null);
   const [frame, setFrame] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -18,7 +20,7 @@ const VideoCropper = ({ onButtonClick }) => {
     const fetchVideoFile = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/trimmedblob/trimmed_output.mp4",
+          `http://localhost:5000/trimmedblob/${trimmed}`,
           {
             responseType: "blob",
           }
@@ -239,7 +241,7 @@ const VideoCropper = ({ onButtonClick }) => {
           type="submit"
           className="btn btn-primary"
           style={{ width: 300, margin: 20 }}
-          disabled={mergeStatus !== "merging"}
+          disabled={mergeStatus == "merged" && !croppedVideoUrl}
         >
           Merge
         </button>

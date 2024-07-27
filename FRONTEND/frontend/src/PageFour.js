@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const PageFour = () => {
-  const mergedVideoUrl = "http://localhost:5000/download/combined_video.mp4";
+  const mergedVideoUrl = "http://localhost:5000/download/final.mp4";
   const handleDownload = () => {
     window.open(mergedVideoUrl, "_blank");
   };

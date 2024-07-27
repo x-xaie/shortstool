@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ThreeCircles } from "react-loader-spinner";
+import { connection_string } from "./global";
 const isValidYoutubeUrl = (url) => {
   const regex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
   return regex.test(url);
@@ -25,7 +26,7 @@ const VideoDownload = ({ onButtonClick }) => {
 
     try {
       setStatus("downloading");
-      const response = await axios.post("http://localhost:5000/download", {
+      const response = await axios.post(`${connection_string}/download`, {
         ytUrl: url,
       });
       console.log(response.data);
