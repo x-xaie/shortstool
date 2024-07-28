@@ -3,6 +3,7 @@ import Cropper from "react-easy-crop";
 import axios from "axios";
 import "./VideoCropper.css";
 import { ThreeCircles, ThreeDots } from "react-loader-spinner";
+import { connection_string } from "./global";
 
 const trimmed = "trimmed.mp4";
 
@@ -20,7 +21,7 @@ const VideoCropper = ({ onButtonClick }) => {
     const fetchVideoFile = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/trimmedblob/${trimmed}`,
+          `${connection_string}trimmedblob/${trimmed}`,
           {
             responseType: "blob",
           }
@@ -33,7 +34,7 @@ const VideoCropper = ({ onButtonClick }) => {
         formData.append("file", file);
 
         const uploadResponse = await axios.post(
-          "http://localhost:5000/upload",
+          `${connection_string}upload`,
           formData,
           {
             headers: {
@@ -87,7 +88,7 @@ const VideoCropper = ({ onButtonClick }) => {
 
     try {
       const uploadResponse = await axios.post(
-        "http://localhost:5000/upload",
+        `${connection_string}upload`,
         formData,
         {
           headers: {
@@ -108,7 +109,7 @@ const VideoCropper = ({ onButtonClick }) => {
     // window.alert("Hello");
     try {
       const cropResponse = await axios.post(
-        "http://localhost:5000/crop",
+        `${connection_string}crop`,
         {
           filepath: filePath,
           x: croppedAreaPixels.x,
@@ -132,7 +133,7 @@ const VideoCropper = ({ onButtonClick }) => {
   const handleMerge = async () => {
     try {
       setStatus("merging");
-      const response = await axios.post("http://localhost:5000/merge");
+      const response = await axios.post(`${connection_string}merge`);
       if (response.status == 200) {
         setStatus("merged");
         onButtonClick("pagefour");

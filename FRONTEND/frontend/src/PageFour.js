@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { connection_string } from "./global";
 
 const PageFour = () => {
-  const mergedVideoUrl = "http://localhost:5000/download/final.mp4";
+  const mergedVideoUrl = `${connection_string}download/final.mp4`;
   const handleDownload = () => {
     window.open(mergedVideoUrl, "_blank");
   };
